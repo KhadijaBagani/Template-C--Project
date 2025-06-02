@@ -6,6 +6,6 @@ internal class Program
     static void Main(string[] args){
         Console.WriteLine("Hello World!");
         //Cómo llamar a un módulo concreto
-        DBtables.Module.Execute();
+        VideoGame.Inventory.Module.Execute();
     }
 }
