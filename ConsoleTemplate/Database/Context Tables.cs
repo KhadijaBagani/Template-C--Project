@@ -9,8 +9,11 @@ namespace Database {
     public partial class LocalDbContext : DbContext {
 
         public DbSet<StateProvince> StateProvince { get; set; }
-        public DbSet<SalesTaxRate> SalesTaxRate { get; set; } 
+        public DbSet<SalesTaxRate> SalesTaxRate { get; set; }
 
-
+        public DbSet<SalesTerritory> SalesTerritory { get; set; }
+        
+        
     }
 }
+
