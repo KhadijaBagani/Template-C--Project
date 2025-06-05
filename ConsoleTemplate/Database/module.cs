@@ -29,19 +29,29 @@ namespace Database{
 
 
                 var narnia = context.SalesTerritory
-                    .Where(row => row.Name == "Narnia")
+                    .Where(row => row.Name == "Narnia2")
                     .First();
+
+
                 // SalesTerritory nuevo = new SalesTerritory() {
-                //     Name = "Narnia",
+                //     Name = "Narnia2",
                 //     CountryRegionCode = "FR",
-                //     //TerritoryId = 1,
+                //     TerritoryId = 1000,
                 //     ModifiedDate = DateTime.Now,
+
                 // };
-                
+
 
                 // context.SalesTerritory.Add(nuevo);
 
-                context.SaveChanges();
+                using (var transaction = context.Database.BeginTransaction()) {
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Sales.SalesTerritory ON;");
+                    context.SaveChanges();
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Sales.SalesTerritory OFF;");
+                    transaction.Commit();
+                }
+    
+                
 
             }
 

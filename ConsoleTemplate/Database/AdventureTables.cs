@@ -75,7 +75,9 @@ namespace Database.Tables.Sales {
         public decimal CostLastYear {
             get;
             set;
-        } 
+        }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid RowGuid {
             get;
             set;
