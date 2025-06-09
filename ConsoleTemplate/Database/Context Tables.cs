@@ -12,7 +12,7 @@ namespace Database {
         public DbSet<SalesTaxRate> SalesTaxRate { get; set; }
 
         public DbSet<SalesTerritory> SalesTerritory { get; set; }
-        
+        public DbSet<CountryRegion> CountryRegion { get; set; }
         
     }
 }
