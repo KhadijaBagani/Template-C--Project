@@ -1,5 +1,7 @@
 
 
+using Database;
+
 /// <summary>
 /// Gestiona la inicialización de los endpoints
 /// </summary>
@@ -29,21 +31,43 @@ public class ApiEndpoints {
     /// Añade todos los endpoints a swagger
     /// </summary>
     public void SetUp() {
+
+        MyEndpoints();
         ExampleGetEndpoints();
         ExamplePostEndpoint();
     }
 
-
     /// <summary>
+    /// Endpoints que hemos hecho nosotros
+    /// </summary>
+    private void MyEndpoints() {
+        var summaries = data.weatherOptions;
+        app.MapGet("prueba1", () => {
+            using (var context = new LocalDbContext()) {
+                Console.WriteLine("Me estoy ejecutando");
+                var Alberta = context.StateProvince
+                    .Where(row => row.Name == "Alberta")
+                    .First();
+
+                return Alberta;
+            }
+        })
+        .WithName("prueba1")
+        .WithDescription("Ejemplo de endpoint get básico")
+        .WithTags("Pruebas");
+    }
+
+
+    /// <summary> 
     /// Añade endpoints Get de ejemplo. Comentar si deja de usarse
     /// </summary>
     private void ExampleGetEndpoints() {
 
         var summaries = data.weatherOptions;
-        app.MapGet("/weatherforecast", () => {
+        app.MapGet("weatherforecast", () => {
             var forecast = Enumerable.Range(1, 5).Select(index =>
                 new WeatherForecast
-                (
+                (   
                     DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                     Random.Shared.Next(-20, 55),
                     summaries[Random.Shared.Next(summaries.Count)]
